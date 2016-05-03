@@ -13,7 +13,7 @@ buildscript {
     }
 }
 
-version "0.1"
+version "1.0.0-SNAPSHOT"
 group "qotd"
 
 apply plugin:"eclipse"
@@ -22,6 +22,7 @@ apply plugin:"war"
 apply plugin:"org.grails.grails-web"
 apply plugin:"org.grails.grails-gsp"
 apply plugin:"asset-pipeline"
+apply plugin:"maven"
 
 ext {
     grailsVersion = project.grailsVersion
@@ -30,7 +31,7 @@ ext {
 
 repositories {
     mavenLocal()
-    maven { url "https://repo.grails.org/grails/core" }
+    maven { url "http://localhost:8081/nexus/content/groups/public" }
 }
 
 dependencyManagement {
@@ -70,3 +71,21 @@ assets {
     minifyJs = true
     minifyCss = true
 }
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			repository(
+				url: "${nexusUrl}/content/repositories/releases") {
+					authentication(userName: nexusUsername,
+					password: nexusPassword)
+				}
+			snapshotRepository(
+				url: "${nexusUrl}/content/repositories/snapshots") {
+					authentication(userName: nexusUsername,
+					password: nexusPassword)
+				}
+			}
+	}
+}
+
