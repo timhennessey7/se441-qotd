@@ -16,8 +16,13 @@ dataSource:
 environments:
     development:
         dataSource:
-            dbCreate: create-drop
-            url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+            dbCreate: ""
+            url: jdbc:h2:./quoteDB;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=TRUE
+        grails:
+            plugin:
+                databasemigration:
+                    updateOnStart: true
+                    updateOnStartFileNames: [changelog.groovy]
     test:
         dataSource:
             dbCreate: update
