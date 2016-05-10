@@ -24,8 +24,9 @@ apply plugin:"war"
 apply plugin:"org.grails.grails-web"
 apply plugin:"org.grails.grails-gsp"
 apply plugin:"asset-pipeline"
-apply plugin:"maven"
 apply plugin:"org.sonarqube"
+apply plugin:"maven"
+
 
 ext {
     grailsVersion = project.grailsVersion
@@ -92,8 +93,12 @@ uploadArchives {
 			}
 		}
 	}
-	}
-
+}
+sonarqube {
+    properties {
+         property "sonar.sources", "grails-app"
+    }
+}
 sourceSets {
 	main {
 		resources {
@@ -102,8 +107,4 @@ sourceSets {
 	}
 }
 
-sonarqube {
-    properties {
-         property "sonar.sources", "grails-app"
-    }
-}
+
