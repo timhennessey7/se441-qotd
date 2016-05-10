@@ -1,7 +1,9 @@
 package qotd
-
 class Quote {
-
-    static constraints = {
-    }
+String text;
+static belongsTo = [attribution:Attribution];
+static constraints = {
+text nullable: false
+attribution nullable: true
+}
 }
