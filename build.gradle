@@ -27,6 +27,9 @@ apply plugin:"asset-pipeline"
 apply plugin:"org.sonarqube"
 apply plugin:"maven"
 
+compileGroovy {
+    targetCompatibility = '1.7'
+}
 
 ext {
     grailsVersion = project.grailsVersion
